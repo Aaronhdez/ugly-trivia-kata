@@ -41,7 +41,7 @@ namespace Trivia {
             Console.WriteLine($"They are player number {_players.Count}");
         }
 
-        public int HowManyPlayers() {
+        private int HowManyPlayers() {
             return _players.Count;
         }
 
@@ -90,20 +90,19 @@ namespace Trivia {
         }
 
         private void AskQuestion() {
-            if (CurrentCategory() == "Pop") {
-                DisplayQuestion(_popQuestions);
-            }
-
-            if (CurrentCategory() == "Science") {
-                DisplayQuestion(_scienceQuestions);
-            }
-
-            if (CurrentCategory() == "Sports") {
-                DisplayQuestion(_sportsQuestions);
-            }
-
-            if (CurrentCategory() == "Rock") {
-                DisplayQuestion(_rockQuestions);
+            switch (CurrentCategory()) {
+                case "Pop":
+                    DisplayQuestion(_popQuestions);
+                    break;
+                case "Science":
+                    DisplayQuestion(_scienceQuestions);
+                    break;
+                case "Sports":
+                    DisplayQuestion(_sportsQuestions);
+                    break;
+                case "Rock":
+                    DisplayQuestion(_rockQuestions);
+                    break;
             }
         }
 

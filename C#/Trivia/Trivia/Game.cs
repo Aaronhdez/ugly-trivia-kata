@@ -60,8 +60,8 @@ namespace Trivia {
                     _isGettingOutOfPenaltyBox = true;
 
                     Console.WriteLine($"{CurrentPlayer()} is getting out of the penalty box");
-                    _places[_currentPlayer] = _places[_currentPlayer] + roll;
-                    if (_places[_currentPlayer] > 11) _places[_currentPlayer] = _places[_currentPlayer] - 12;
+                    _places[_currentPlayer] += roll;
+                    if (_places[_currentPlayer] > 11) _places[_currentPlayer] -= 12;
 
                     Console.WriteLine($"{CurrentPlayer()}'s new location is {_places[_currentPlayer]}");
                     Console.WriteLine($"The category is {CurrentCategory()}");
@@ -73,8 +73,8 @@ namespace Trivia {
                 }
             }
             else {
-                _places[_currentPlayer] = _places[_currentPlayer] + roll;
-                if (_places[_currentPlayer] > 11) _places[_currentPlayer] = _places[_currentPlayer] - 12;
+                _places[_currentPlayer] += roll;
+                if (_places[_currentPlayer] > 11) _places[_currentPlayer] -= 12;
 
                 Console.WriteLine($"{CurrentPlayer()}'s new location is {_places[_currentPlayer]}");
                 Console.WriteLine($"The category is {CurrentCategory()}");

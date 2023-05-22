@@ -38,7 +38,7 @@ namespace Trivia {
             _purses[HowManyPlayers()] = 0;
             _inPenaltyBox[HowManyPlayers()] = false;
             Console.WriteLine($"{playerName} was added");
-            Console.WriteLine($"They are player number {_players.Count}");
+            Console.WriteLine($"They are player number {HowManyPlayers()}");
         }
 
         private int HowManyPlayers() {
@@ -55,8 +55,7 @@ namespace Trivia {
                     _isGettingOutOfPenaltyBox = true;
 
                     Console.WriteLine($"{CurrentPlayer()} is getting out of the penalty box");
-                    place += roll;
-                    if (place > 11) place -= 12;
+                    place = RollTheDice(roll, place);
 
                     Console.WriteLine($"{CurrentPlayer()}'s new location is {place}");
                     Console.WriteLine($"The category is {CurrentCategory()}");
@@ -68,13 +67,18 @@ namespace Trivia {
                 }
             }
             else {
-                place += roll;
-                if (place > 11) place -= 12;
+                place = RollTheDice(roll, place);
 
                 Console.WriteLine($"{CurrentPlayer()}'s new location is {place}");
                 Console.WriteLine($"The category is {CurrentCategory()}");
                 AskQuestion();
             }
+        }
+
+        private static int RollTheDice(int roll, int place) {
+            place += roll;
+            if (place > 11) place -= 12;
+            return place;
         }
 
         private int CurrentPlayerPlace() {

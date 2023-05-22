@@ -54,16 +54,17 @@ namespace Trivia {
         public void Roll(int roll) {
             Console.WriteLine($"{CurrentPlayer()} is the current player");
             Console.WriteLine($"They have rolled a {roll}");
+            var place = CurrentPlayerPlace();
 
-            if (_inPenaltyBox[_currentPlayer]) {
+            if (PlayerInPenaltyBox()) {
                 if (roll % 2 != 0) {
                     _isGettingOutOfPenaltyBox = true;
 
                     Console.WriteLine($"{CurrentPlayer()} is getting out of the penalty box");
-                    _places[_currentPlayer] += roll;
-                    if (_places[_currentPlayer] > 11) _places[_currentPlayer] -= 12;
+                    place += roll;
+                    if (place > 11) place -= 12;
 
-                    Console.WriteLine($"{CurrentPlayer()}'s new location is {_places[_currentPlayer]}");
+                    Console.WriteLine($"{CurrentPlayer()}'s new location is {place}");
                     Console.WriteLine($"The category is {CurrentCategory()}");
                     AskQuestion();
                 }
@@ -73,13 +74,21 @@ namespace Trivia {
                 }
             }
             else {
-                _places[_currentPlayer] += roll;
-                if (_places[_currentPlayer] > 11) _places[_currentPlayer] -= 12;
+                place += roll;
+                if (place > 11) place -= 12;
 
-                Console.WriteLine($"{CurrentPlayer()}'s new location is {_places[_currentPlayer]}");
+                Console.WriteLine($"{CurrentPlayer()}'s new location is {place}");
                 Console.WriteLine($"The category is {CurrentCategory()}");
                 AskQuestion();
             }
+        }
+
+        private int CurrentPlayerPlace() {
+            return _places[_currentPlayer];
+        }
+
+        private bool PlayerInPenaltyBox() {
+            return _inPenaltyBox[_currentPlayer];
         }
 
         private string CurrentPlayer() {

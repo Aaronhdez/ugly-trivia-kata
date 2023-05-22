@@ -21,30 +21,24 @@ namespace Trivia {
 
         public Game() {
             for (var i = 0; i < 50; i++) {
-                _popQuestions.AddLast($"Pop Question {i}");
-                _scienceQuestions.AddLast(("Science Question " + i));
-                _sportsQuestions.AddLast(("Sports Question " + i));
-                _rockQuestions.AddLast(CreateRockQuestion(i));
+                _popQuestions.AddLast(CreateQuestion("Pop" , i));
+                _scienceQuestions.AddLast(CreateQuestion("Science", i));
+                _sportsQuestions.AddLast(CreateQuestion("Sports" , i));
+                _rockQuestions.AddLast(CreateQuestion("Rock" , i));
             }
         }
 
-        public string CreateRockQuestion(int index) {
-            return $"Rock Question {index}";
+        private string CreateQuestion(string category, int index) {
+            return $"{category} Question {index}";
         }
 
-        public bool IsPlayable() {
-            return (HowManyPlayers() >= 2);
-        }
-
-        public bool Add(string playerName) {
+        public void Add(string playerName) {
             _players.Add(playerName);
             _places[HowManyPlayers()] = 0;
             _purses[HowManyPlayers()] = 0;
             _inPenaltyBox[HowManyPlayers()] = false;
-
             Console.WriteLine($"{playerName} was added");
             Console.WriteLine($"They are player number {_players.Count}");
-            return true;
         }
 
         public int HowManyPlayers() {
